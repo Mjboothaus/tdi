@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap-theme.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Recipe</title>
+    <!-- Custom styles for this template -->
+    <link href="narrow-jumbotron.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://www.yummly.com" target="_blank">Yummly</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/static/about.html">About</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted"><a href="https://www.about.me/mjboothaus" target="_blank">
+            @mjboothaus</a></h3>
+    </div>
+
+    <div class="jumbotron">
+
+        <h3 class="display-5">Recipe Search Results - Id: {{ recipe_id }}</h3>
+        <h4 class="display-6">Name: {{ recipe_name|safe }}</h4>
+        <h4 class="display-6">Rating: {{ recipe_rating|safe }}</h4>
+        {% for ingred in ingred_list %}
+            <p>Ingredient # {{ loop.index }} - {{ ingred }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
