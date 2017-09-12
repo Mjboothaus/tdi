@@ -8,6 +8,9 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
+from flask import Flask
+from flask.ext.cache import Cache
+
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Length, AnyOf
 
@@ -43,10 +46,13 @@ def main():
 
 # App configuration
 
+cache = Cache(config={'CACHE_TYPE': 'simple'})
+
 DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
+cache.init_app(app)
 
 Bootstrap(app)
 
@@ -57,6 +63,7 @@ def index():
 
 
 @app.route('/search_recipe', methods=['GET', 'POST'])
+@cache.cached(timeout=50)
 def searchrecipe():
     form = SearchRecipeForm()
     return render_template('search_recipe.html', form=form)
@@ -113,4 +120,4 @@ def recipe():
 
 if __name__ == '__main__':
     main()
-    app.run(port=33507)
+    app.run(port=33507, debug=True)
