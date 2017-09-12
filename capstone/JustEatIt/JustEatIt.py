@@ -22,6 +22,9 @@ API_ID = 'b4f167ed'
 API_KEY = 'f69184af19beb4b76e7b7b1984046581'
 
 
+# TODO: Look at saving down / caching queries for re-use to avoid using up too many queries
+# TODO: Can I use the Beaker library for this? http://beaker.readthedocs.io/en/latest/index.html
+
 # TODO: Need to get templated code into html files
 
 class SearchRecipeForm(FlaskForm):
@@ -50,6 +53,11 @@ Bootstrap(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    return render_template('splash_screen.html')
+
+
+@app.route('/search_recipe', methods=['GET', 'POST'])
+def searchrecipe():
     form = SearchRecipeForm()
     return render_template('search_recipe.html', form=form)
 
